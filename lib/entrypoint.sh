@@ -19,7 +19,7 @@ fi
 
 
 tag=${INPUT_TERMS:=FIXME}
-result=$(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "(${tag})+(:)" :^.github)
+result=$(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "(${tag})+" :^.github)
 
 echo "${result}"
 
