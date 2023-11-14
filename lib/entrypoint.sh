@@ -19,7 +19,6 @@ fi
 
 
 tag=${INPUT_TERMS:=FIXME}
-exclude=${INPUT_EXCLUDE:=FIXME}
 
 exclude_paths=(".github")
 if [ -n "$INPUT_EXCLUDE" ]; then
@@ -29,7 +28,7 @@ if [ -n "$INPUT_EXCLUDE" ]; then
     read -ra exclude_parts <<< "$INPUT_EXCLUDE"
     for el in "${exclude_parts[@]}"
     do
-      exclude_paths += ( "$el" )
+      exclude_paths+=( "$el" )
     done
 else
     echo "Variable is either not set or is null."
@@ -40,7 +39,7 @@ for path in "${exclude_paths[@]}"; do
   pathspec+=":^${path} "
 done
 
-echo "git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "(${tag})+" ${pathspec}"
+echo "git grep --no-color ${case_sensitive} --line-number --extended-regexp -e \"(${tag})+\" ${pathspec}"
 
 result=$(git grep --no-color ${case_sensitive} --line-number --extended-regexp -e "(${tag})+" ${pathspec})
 
